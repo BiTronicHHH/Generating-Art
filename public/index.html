@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Creative Art</title>
+  <meta
+    content="Epic NFT Marketplace UI Design Kit"
+    name="description">
+  <meta content="Crypter - NFT Marketplace UI Kit" property="og:title">
+  <meta
+    content="Epic NFT Marketplace UI Design Kit"
+    property="og:description">
+  <meta content="%PUBLIC_URL%/fb-og-image.png" property="og:image">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="">
+  <meta content="Crypter - NFT Marketplace UI Kit" property="twitter:title">
+  <meta
+    content="Premium Web UI Kit for Fitness Experience"
+    property="twitter:description">
+  <meta content="%PUBLIC_URL%/twitter-card.png" property="twitter:image">
+  <meta property="og:type" content="website">
+  <meta content="summary" name="twitter:card">
+  <meta name="twitter:site" content="@ui8">
+  <meta name="twitter:creator" content="@ui8">
+  <meta property="fb:admins" content="132951670226590">
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+  <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+</head>
+<body>
+  <script>
+    // Insert this script in your index.html right after the <body> tag.
+    // This will help to prevent a flash if dark mode is the default.
+
+    (function () {
+      // Change these if you use something different in your hook.
+      var storageKey = 'darkMode';
+      var classNameDark = 'dark-mode';
+      var classNameLight = 'light-mode';
+
+      function setClassOnDocumentBody(darkMode) {
+        document.body.classList.add(darkMode ? classNameDark : classNameLight);
+        document.body.classList.remove(darkMode ? classNameLight : classNameDark);
+      }
+
+      var preferDarkQuery = '(prefers-color-scheme: dark)';
+      var mql = window.matchMedia(preferDarkQuery);
+      var supportsColorSchemeQuery = mql.media === preferDarkQuery;
+      var localStorageTheme = null;
+      try {
+        localStorageTheme = localStorage.getItem(storageKey);
+      } catch (err) { }
+      var localStorageExists = localStorageTheme !== null;
+      if (localStorageExists) {
+        localStorageTheme = JSON.parse(localStorageTheme);
+      }
+
+      // Determine the source of truth
+      if (localStorageExists) {
+        // source of truth from localStorage
+        setClassOnDocumentBody(localStorageTheme);
+      } else if (supportsColorSchemeQuery) {
+        // source of truth from system
+        setClassOnDocumentBody(mql.matches);
+        localStorage.setItem(storageKey, mql.matches);
+      } else {
+        // source of truth from document.body
+        var isDarkMode = document.body.classList.contains(classNameDark);
+        localStorage.setItem(storageKey, JSON.stringify(isDarkMode));
+      }
+    })();
+  </script>
+  <div id="root"></div>
+</body>
+
+</html>
